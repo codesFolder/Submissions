@@ -6,7 +6,8 @@ int main () {
         cout<<i<<" ";
     }
     // 3 increase
-    // git diff = working tree compare staging area
+    // git diff = working directory compare staging area
     // git diff --staged = staging area compare last commit
+    // git rm = remove from working directory and staging area
     return 0;
 }
