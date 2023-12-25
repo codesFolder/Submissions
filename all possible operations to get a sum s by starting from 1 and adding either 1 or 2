@@ -1,0 +1,88 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+#define sr srand(time(0));
+#define ra(l, h) (rand() % ((h)-(l)+1) + (l))
+#define sync { ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL); }
+#define ll long long int
+#define vi vector<int>
+#define fn(n) for(int i = 0; i < n; i++)
+#define fr(i, a, b) for(int i = a; i <= b; i++)
+#define rfr(i, a, b) for(int i = a; i >= b; i--)
+#define pb push_back
+#define all(a) a.begin(), a.end()
+#define tt int test; cin >> test; while(test--)
+#define ff first
+#define ss second
+#define en cout<< "\n"
+#define cy cout << "YES" << endl
+#define cn cout << "NO" << endl
+
+
+
+void printSumOperations(int sum, vector<int>& current) {
+    if (sum == 0) {
+        // Print the current sequence of operations
+        for (int i = 0; i < current.size(); ++i) {
+            cout << (i == 0 ? "" : " + ") << current[i];
+        }
+        cout << endl;
+        return;
+    }
+
+    if (sum >= 1) {
+        // Add 1 to the current sequence and recurse
+        current.push_back(1);
+        printSumOperations(sum - 1, current);
+        current.pop_back();  // backtrack
+    }
+
+    if (sum >= 2) {
+        // Add 2 to the current sequence and recurse
+        current.push_back(2);
+        printSumOperations(sum - 2, current);
+        current.pop_back();  // backtrack
+    }
+}
+
+
+int countSumOperations(int sum) {
+    if (sum == 0 || sum == 1) {
+        // Base cases: only one way to get sum 0 or 1 (by not adding any more)
+        return 1;
+    }
+
+    int count = 0;
+
+    if (sum >= 1) {
+        // Add 1 and recurse
+        count += countSumOperations(sum - 1);
+    }
+
+    if (sum >= 2) {
+        // Add 2 and recurse
+        count += countSumOperations(sum - 2);
+    }
+
+    return count;
+}
+
+
+int main() {
+    sync
+    tt {
+        // To print all possible operations to get a sum s by starting from 1 and adding either 1 or 2
+        
+        int s;
+        cin>>s;
+        
+        vector<int> current;
+        printSumOperations(s, current);
+        
+        int totalways = countSumOperations(s);
+        cout << totalways << endl;
+        
+    }
+    return 0;
+}
+
